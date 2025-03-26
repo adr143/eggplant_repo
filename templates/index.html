@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <link rel="stylesheet" href='{{ url_for("static", filename="css/style.css") }}'>
+</head>
+<body>
+    <h1>Plant Disease Detection</h1>
+    <div class="container">
+        <div class="left-panel">
+            <div class="video-feed">
+                <img id="video-output" src="/live_feed" alt="Live Feed">
+            </div>
+            <div class="button-group">
+                <button onclick="captureImage()">Capture and Process Image</button>
+                <button onclick="viewLatestImage()">View Processed Image</button>
+                <button onclick="showLiveFeed()">Return to Live Feed</button>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div class="output-section">
+                <h2>Latest Detection Results</h2>
+                <div id="json-output" class="json-output">No detections yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function captureImage() {
+            const response = await fetch('/capture', { method: 'POST' });
+            const result = await response.json();
+
+            if (result.status) {
+                alert(result.status);
+            } else {
+                alert('Error capturing and processing the image.');
+            }
+        }
+
+        async function viewLatestImage() {
+            const response = await fetch('/latest_image_info');
+            const result = await response.json();
+
+            if (result.status === "success") {
+                const processedImageContainer = document.querySelector('.video-feed');
+                processedImageContainer.innerHTML = `
+                    <img id="processed-output" src="${result.image_path}" alt="Processed Image" 
+                        style="border: 2px solid #4CAF50; border-radius: 5px;">
+                `;
+
+                const jsonOutputContainer = document.getElementById('json-output');
+                const detections = result.detections || [];
+                if (detections.length > 0) {
+                    const formattedDetections = detections.map(d => `
+                        Detected Object: <strong>${d.disease}</strong><br><br>
+                        Info: <em>${d.info}</em><br><br>
+                        Cure: 
+                        <ol>
+                            ${d.cure.map((c, index) => `<li>${c}</li>`).join('')}
+                        </ol><br><br>
+                        Coordinates: (${d.coordinates.join(', ')})<br>
+                    `).join('<hr>');
+                    jsonOutputContainer.innerHTML = formattedDetections;
+                } else {
+                    jsonOutputContainer.innerHTML = "No detections found in the latest image.";
+                }
+            } else {
+                alert(result.message || 'No latest image available.');
+            }
+        }
+
+        function showLiveFeed() {
+            const liveFeedContainer = document.querySelector('.video-feed');
+            liveFeedContainer.innerHTML = `
+                <img id="video-output" src="/live_feed" alt="Live Feed">
+            `;
+        }
+    </script>
+</body>
+</html>

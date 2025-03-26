@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+*.dll
+*.dylib
+
+# Virtual environment
+venv/
+env/
+*.venv
+yolo-venv
+
+# Flask & Python environment
+instance/
+*.
+build

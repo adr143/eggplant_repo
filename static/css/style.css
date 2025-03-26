@@ -1,0 +1,198 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and page layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 100%; /* Ensure container fits within viewport */
+}
+
+/* Left panel */
+.left-panel {
+    flex: 1;
+    min-width: 300px; /* Ensure panels don't get too small */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.video-feed {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#video-output {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 18px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Button width adjusted to 100% */
+    max-width: 200px; /* Prevent buttons from growing too wide */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Right panel */
+.right-panel {
+    flex: 1;
+    min-width: 300px; /* Ensure panels don't get too small */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.output-section {
+    text-align: center;
+}
+
+h2 {
+    color: #4CAF50;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.json-output {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: start;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10%;
+    border-radius: 5px;
+    max-height: 250px; /* Reduced height */
+    overflow-y: auto;
+    color: #333;
+    margin-top: 15px;
+}
+
+/* Style for processed image output */
+#processed-output {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 2px solid #4CAF50;
+}
+
+/* Media Queries for responsiveness */
+
+/* Small devices (phones, 600px and below) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Adjust heading size for small screens */
+    }
+
+    .container {
+        flex-direction: column; /* Stack panels on top of each other */
+        align-items: center;
+        gap: 20px; /* Add spacing between stacked panels */
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .button-group {
+        flex-direction: column; /* Display buttons side-by-side on small screens */
+        align-items: center;
+        width: 100%;
+    }
+
+    button {
+        width: 30%; /* Ensure buttons are not too wide */
+    }
+
+    .json-output {
+        max-height: 200px; /* Reduce the height for smaller screens */
+    }
+}
+
+/* Medium devices (tablets, 601px to 1024px) */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2.2em; /* Slightly adjust the heading size */
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-panel, .right-panel {
+        width: 90%; /* Use more space on medium-sized screens */
+    }
+
+    .button-group {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    button {
+        width: 45%; /* Buttons are larger on tablets */
+    }
+}
+
+/* Large devices (desktops, 1025px and above) */
+@media (min-width: 1025px) {
+    .container {
+        flex-direction: row; /* Default row layout for desktops */
+        align-items: flex-start;
+        justify-content: space-between; /* Spread items across the screen */
+    }
+
+    .left-panel, .right-panel {
+        width: 48%; /* Ensures both panels have equal width */
+    }
+
+    .button-group {
+        flex-direction: row; /* Buttons stay vertical */
+        justify-content: center;
+    }
+
+    button {
+        width: 100%; /* Ensure buttons are 100% width in the button group */
+    }
+}

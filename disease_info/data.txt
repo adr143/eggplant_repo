@@ -1,0 +1,5 @@
+{
+    "powdery mildew": "Powdery mildew is a fungal disease that affects many plants, causing white powdery spots.",
+    "target spot": "Target spot is a fungal disease that causes necrotic lesions on the leaves.",
+    "spotted wilt": "Spotted wilt is a viral disease that leads to stunted growth and discoloration of plant tissues."
+}
